@@ -1,8 +1,8 @@
 {
-  "name": "ecommerce-shop",
+  "name": "omdb-api-gh-page",
   "version": "1.0.0",
   "private": false,
-  "description": "Eccomerce shop page",
+  "description": "OMDb API GH page",
   "main": "index.js",
   "scripts": {
     "startServer": "serve -s .",
