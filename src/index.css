@@ -10,8 +10,7 @@
 }
 
 #homeMainContainer {
-    background: linear-gradient(rgba(0, 0, 0, 0.7),
-        rgba(0, 0, 0, 0.7));
+    filter: brightness(10%);
 
     background-image: url(https://i.etsystatic.com/23045456/r/il/6849e8/3535818403/il_fullxfull.3535818403_nlmh.jpg);
     background-position: center;
