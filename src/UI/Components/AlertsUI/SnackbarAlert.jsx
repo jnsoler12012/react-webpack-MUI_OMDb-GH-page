@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import { IoClose } from "react-icons/io5";
 import { Alert } from '@mui/material';
 
 
@@ -47,7 +47,7 @@ export default function ({ statusResponse, setMainContext }) {
                         color="inherit"
                         onClick={handleClose}
                     >
-                        <CloseIcon fontSize="small" />
+                        <IoClose fontSize="big" />
                     </IconButton>
                 }
             >
