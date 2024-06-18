@@ -33,7 +33,7 @@ export default function ({ statusResponse, setMainContext }) {
                 width: 'auto'
             }}
             open={(code) ? true : false}
-            autoHideDuration={30000000}
+            autoHideDuration={3000}
             onClose={handleClose}
         >
             <Alert

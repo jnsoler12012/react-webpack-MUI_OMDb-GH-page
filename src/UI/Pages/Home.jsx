@@ -25,12 +25,12 @@ async function testing(filterOptions, setMainContext) {
             isLoading: result.isLoading
         })).filter(Boolean);
 
-        // console.log('testing', detailedMovies);
+        console.log(movies, detailedMovies);
         if (!moviesLoading) {
-            if (!(Array.isArray(movies)))
+            if (!(Array.isArray(movies?.Search)))
                 return resolve(movies)
             if (detailedMovies.every(movie => !movie.isLoading))
-                return resolve(detailedMovies)
+                return resolve({ mainData: movies, formatedData: detailedMovies })
         }
 
     })
@@ -62,6 +62,19 @@ export default function () {
         }))
     }
 
+    const execNewPage = (event, value) => {
+        console.log(value, 'asdasdasd');
+        setMainContext((prevState) => ({
+            ...prevState,
+            reloadReq: true,
+            filterOptions: {
+                ...prevState.filterOptions,
+                page: value
+            }
+        }))
+    }
+
+
 
     if (!data || reloadReq)
         (
@@ -71,11 +84,11 @@ export default function () {
                         .then((response) => {
                             console.log('foma;', response);
                             if (response !== undefined && response) {
-                                console.log('habemus algo');
+                                console.log('habemus algo', response);
                                 setMainContext((prevState) => ({
                                     ...prevState,
                                     reloadReq: false,
-                                    responsePetition: !(Array.isArray(response))
+                                    responsePetition: !(Array.isArray(response?.formatedData))
                                         ? ({
                                             data: [],
                                             status: {
@@ -84,13 +97,14 @@ export default function () {
                                             }
                                         })
                                         : ({
-                                            data: response.reduce((reducer, movie) => {
+                                            data: response?.formatedData?.reduce((reducer, movie) => {
                                                 reducer.push(movie.data);
                                                 return reducer;
                                             }, []),
+                                            counterPage: Math.ceil(response?.mainData?.totalResults / 10),
                                             status: {
                                                 code: 200,
-                                                message: 'Success'
+                                                message: 'Success',
                                             }
                                         })
                                 }))
@@ -109,12 +123,13 @@ export default function () {
             sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                backgroundColor: 'green',
+                background: 'rgb(255, 255, 255)',
+                background: 'linear - gradient(180deg, rgba(255, 255, 255, 0) 0 %, rgba(255, 255, 255, 0) 100 %)',
                 height: 'auto',
                 width: '100%'
             }}>
             <AsideBar movieList={data} execFilterSearch={execFilterSearch}>
-                <MovieCardContainer movieList={data} />
+                <MovieCardContainer movieList={data} dataResponse={responsePetition} execNewPage={execNewPage} />
             </AsideBar>
         </Box>
     )

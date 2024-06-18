@@ -7,13 +7,11 @@ export default function ({ data }) {
     const { Title, Type, Year, Director, Poster } = item
     console.log(item);
     return (
-        <ImageListItem key={index} sx={{ width: '80%', my: 1.2 }}>
-            <img
-                srcSet={`${Poster}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                src={`${Poster}?w=248&fit=crop&auto=format`}
-                alt={'test'}
-                loading="lazy"
-            />
+        <ImageListItem key={index} sx={{ maxWidth: '80%', my: 1.2, boxShadow: 6, }}>
+            <div className="image-container" style={{ backgroundImage: (Poster === 'N/A') ? `url(https://www.prokerala.com/movies/assets/img/no-poster-available.jpg)` : `url(${Poster})` }}>
+
+            </div>
+
             <ImageListItemBar
                 title={Title}
                 subtitle={`${Director}-${Year}`}
@@ -26,6 +24,6 @@ export default function ({ data }) {
                     </IconButton>
                 }
             />
-        </ImageListItem>
+        </ImageListItem >
     )
 }
