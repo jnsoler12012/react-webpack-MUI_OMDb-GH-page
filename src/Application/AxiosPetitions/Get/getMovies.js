@@ -5,5 +5,5 @@ export default async function ({ queryKey }) {
     const response = await axios.get(`http://www.omdbapi.com/?s=${search}&page=${page}&apikey=${apiKey}`);
 
     console.log(response);
-    return response.data.Search ? response.data.Search : response.data;
+    return response.data ? response.data : response.data;
 };

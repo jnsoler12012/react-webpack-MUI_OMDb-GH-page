@@ -3,8 +3,27 @@
     padding: 0;
 }
 
-body,
 #root {
     width: 100vw;
     height: 100vh;
+
+}
+
+#homeMainContainer {
+    background: linear-gradient(rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7));
+
+    background-image: url(https://i.etsystatic.com/23045456/r/il/6849e8/3535818403/il_fullxfull.3535818403_nlmh.jpg);
+    background-position: center;
+    background-size: 70%;
+}
+
+.image-container {
+    width: 300px;
+    /* Desired width */
+    height: 430px;
+    /* Desired height */
+    background-size: cover;
+    /* other options: contain, auto */
+    background-position: top;
 }

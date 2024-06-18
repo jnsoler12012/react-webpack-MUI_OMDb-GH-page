@@ -109,7 +109,9 @@ export default function (props) {
             display: 'flex',
             height: 'auto',
             flexDirection: 'column',
-            width: { xs: '100%', sm: `calc(100% - ${drawerWidth}px)` }
+            width: { xs: '100%', sm: `calc(100% - ${drawerWidth}px)` },
+            background: 'rgb(255, 255, 255)',
+            background: 'linear - gradient(180deg, rgba(255, 255, 255, 0) 0 %, rgba(255, 255, 255, 0) 100%)',
         }}>
             <CssBaseline />
             <AppBar
@@ -117,10 +119,18 @@ export default function (props) {
                 position="relative"
                 sx={{
                     width: { sm: `auto` },
-                    backgroundColor: 'red'
+                    background: ' rgb(255,255,255)',
+                    background: 'linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)',
+                    display: 'flex',
+                    alignItems: 'center'
                 }}
             >
-                <Toolbar>
+                <Toolbar sx={{
+                    borderRadius: '1rem',
+                    backgroundColor: 'white',
+                    width: '60%',
+                    height: 'auto'
+                }}>
                     <IconButton
                         color="black"
                         aria-label="open drawer"
@@ -173,7 +183,7 @@ export default function (props) {
                     sx={{
 
                         display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, height: '90%', top: '10%', position: 'fixed' },
+                        '& .MuiDrawer-paper': { padding: '0.3rem 0.7rem', boxShadow: 3, boxSizing: 'border-box', width: drawerWidth, height: '90%', top: '10%', position: 'fixed', margin: '6px 9px;' },
                     }}
                 >
                     {drawer}
@@ -181,9 +191,10 @@ export default function (props) {
                 <Drawer
                     variant="permanent"
                     sx={{
+                        boxShadow: 3,
                         position: 'relative',
                         display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, height: '90%', top: '10%', position: 'fixed' },
+                        '& .MuiDrawer-paper': { padding: '0.3rem 0.7rem', boxShadow: 3, boxSizing: 'border-box', width: drawerWidth, height: '90%', top: '10%', position: 'fixed', margin: '6px 9px;' },
                     }}
                     open
                 >
@@ -196,6 +207,6 @@ export default function (props) {
             >
                 {children}
             </Box>
-        </Box>
+        </Box >
     );
 }

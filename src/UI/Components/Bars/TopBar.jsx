@@ -12,7 +12,7 @@ export default function () {
             alignItems: 'center',
             borderBottom: 1,
             borderColor: 'divider',
-            backgroundColor: 'red',
+            background: '#DC5F00',
             height: '10%'
         }}>
             <Box

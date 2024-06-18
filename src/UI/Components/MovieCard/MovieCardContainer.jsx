@@ -1,18 +1,26 @@
-import { Box, ImageList, ImageListItem, ListSubheader, useMediaQuery } from '@mui/material'
+import { Box, ImageList, ImageListItem, ListSubheader, Pagination, Stack, useMediaQuery } from '@mui/material'
 import React from 'react'
 import MovieCard from './MovieCard'
 
-export default function ({ movieList }) {
+export default function ({ movieList, dataResponse, execNewPage }) {
+
+    const { data, counterPage } = dataResponse
 
     const matchesSm = useMediaQuery('(max-width:900px)');
     const matchesMd = useMediaQuery('(max-width:1200px)');
-    const matchesXL = useMediaQuery('(max-width:1536px)');
+    const matchesXL = useMediaQuery('(max-width:1650px)');
 
     return (
         <Box
             id='MovieCardContainer'
             sx={{
-                backgroundColor: ' #4dff88',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignContent: 'center',
+                alignItems: 'center',
+                background: 'rgb(255, 255, 255)',
+                background: 'linear - gradient(180deg, rgba(255, 255, 255, 0) 0 %, rgba(255, 255, 255, 0) 100 %)',
                 height: '100%',
                 mt: 2
             }}
@@ -28,6 +36,15 @@ export default function ({ movieList }) {
                         </Box>)
                 }
             </ImageList>
+            <Stack spacing={2} style={{ margin: '1rem 0', backgroundColor: 'white' }}>
+                <Pagination
+                    count={counterPage}
+                    showFirstButton
+                    showLastButton
+                    size="large"
+                    onChange={execNewPage}
+                />
+            </Stack>
         </Box>
     )
 }
