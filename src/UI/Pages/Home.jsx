@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Image1 from 'Images/Logo.png';
 import Button from '@mui/material/Button';
 import { MainContext } from '../../Infrastructure';
@@ -6,6 +6,8 @@ import axios from 'axios';
 import { Box } from '@mui/material';
 import { useQueries, useQuery, useQueryClient } from '@tanstack/react-query';
 import { queriesMovies, queriesMoviesDetails, queryMovie } from '../../Application/ReactQuery';
+import { MovieCard, MovieCardContainer } from '../Components/MovieCard';
+import { AsideBar } from '../Components/Bars';
 
 async function testing(filterOptions, setMainContext) {
     console.log('estamos aca adentro');
@@ -39,23 +41,29 @@ export default function () {
     // Access the client
     const queryClient = useQueryClient()
 
+
     const [mainContext, setMainContext] = useContext(MainContext);
 
-    const { loadingState, filterOptions, responsePetition } = mainContext;
+    const { reloadReq, loadingState, filterOptions, responsePetition } = mainContext;
 
     const { data } = responsePetition
 
-    const functions2 = () => {
+    console.log(data);
+
+    const execFilterSearch = ({ searchName }) => {
+        console.log(searchName.value, 'asdasdasd');
         setMainContext((prevState) => ({
             ...prevState,
+            reloadReq: true,
             filterOptions: {
-                ...filterOptions,
-                page: 2
+                search: searchName.value,
+                page: 1
             }
         }))
     }
 
-    if (!data)
+
+    if (!data || reloadReq)
         (
             () => {
                 (async function () {
@@ -66,6 +74,7 @@ export default function () {
                                 console.log('habemus algo');
                                 setMainContext((prevState) => ({
                                     ...prevState,
+                                    reloadReq: false,
                                     responsePetition: !(Array.isArray(response))
                                         ? ({
                                             data: [],
@@ -94,30 +103,20 @@ export default function () {
         )()
 
 
-
     return (
         <Box
             id='homeMainContainer'
             sx={{
                 display: 'flex',
-                alignContent: 'center',
                 justifyContent: 'center',
-                alignItems: 'center',
                 backgroundColor: 'green',
-                height: '89.9%'
+                height: 'auto',
+                width: '100%'
             }}>
-            <Box
-                id='asideBarContainer'
-            >
-                asd{`${'asd'} ${'asd'}`}
-            </Box>
-            <Box
-                id='movieListContainer'
-            >
-                <button onClick={() => {
-                    functions2();
-                }}>asd</button>
-            </Box>
+            <AsideBar movieList={data} execFilterSearch={execFilterSearch}>
+                <MovieCardContainer movieList={data} />
+            </AsideBar>
         </Box>
     )
 }
+

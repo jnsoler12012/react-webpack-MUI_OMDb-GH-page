@@ -12,6 +12,7 @@ export const MainApp = () => {
   const queryClient = new QueryClient();
 
   const [main, setMain] = useState({
+    reloadReq: false,
     loadingState: false,
     filterOptions: {
       search: 'Godfather',
@@ -32,7 +33,7 @@ export const MainApp = () => {
   useEffect(() => {
     console.log('-------------CAMBIO MAIN STATE', main);
 
- 
+
   }, [main.responsePetition])
 
 
